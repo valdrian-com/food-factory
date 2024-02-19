@@ -1,0 +1,7 @@
+{
+  "name": "food-factory",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
