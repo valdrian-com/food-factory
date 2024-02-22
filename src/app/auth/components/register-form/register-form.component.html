@@ -1,0 +1,65 @@
+<h5 class="mb-15 display-6">{{ "Sign Up" | translate }}</h5>
+<form #registerForm="ngForm">
+  <ion-input
+    name="firstName"
+    type="text"
+    [(ngModel)]="registerData.firstName"
+    required
+    label="{{ 'First Name' | translate }}"
+    label-placement="floating"
+  ></ion-input>
+  <ion-input
+    name="lastName"
+    type="text"
+    [(ngModel)]="registerData.lastName"
+    required
+    label="{{ 'Last Name' | translate }}"
+    label-placement="floating"
+  ></ion-input>
+  <ion-input
+    name="email"
+    type="email"
+    [(ngModel)]="registerData.email"
+    required
+    label="{{ 'Email' | translate }}"
+    label-placement="floating"
+    pattern="[^@s]+@[^@s]+.[^@s]+"
+  ></ion-input>
+  <div class="input-password">
+    <ion-input
+      name="password"
+      type="{{ showPassword ? 'text' : 'password' }}"
+      [(ngModel)]="registerData.password"
+      required
+      label="{{ 'Password' | translate }}"
+      label-placement="floating"
+      placeholder="{{ 'Password' | translate }}"
+      minlength="8"
+    >
+    </ion-input>
+    <ion-icon
+      class="show-option"
+      *ngIf="showPassword"
+      name="eye-off-outline"
+      (click)="toggleShow()"
+    ></ion-icon>
+    <ion-icon
+      class="hide-option"
+      *ngIf="!showPassword"
+      name="eye-outline"
+      (click)="toggleShow()"
+    ></ion-icon>
+  </div>
+
+  <ion-button
+    [disabled]="registerForm.invalid"
+    expand="full"
+    (click)="register()"
+    >{{ "Register" | translate }}</ion-button
+  >
+  <div class="py-5">
+    {{ "Already have an account?" | translate }}
+    <a [routerLink]="['/auth/login']">{{ "Login here" | translate }}</a
+    >.
+  </div>
+</form>

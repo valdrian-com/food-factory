@@ -1,14 +1,34 @@
 import { Routes } from '@angular/router';
+import {
+  isAuthenticateGuard,
+  isNotAuthenticateGuard,
+} from './shared/gurads/auth.guard';
 
 export const routes: Routes = [
   {
+    path: 'auth',
+    loadChildren: () => import('./auth/routes').then((m) => m.AUTH_ROUTES),
+    canActivate: [isNotAuthenticateGuard()],
+  },
+
+  {
     path: '',
-    redirectTo: 'folder/inbox',
-    pathMatch: 'full',
+    loadChildren: () =>
+      import('./dashboard/routes').then((m) => m.DASHBOARD_ROUTES),
+    canActivate: [isAuthenticateGuard()],
   },
   {
-    path: 'folder/:id',
+    path: 'organization',
     loadComponent: () =>
-      import('./folder/folder.page').then((m) => m.FolderPage),
+      import('./dashboard/pages/organization/organization.page').then(
+        (m) => m.OrganizationPage
+      ),
+  },
+  {
+    path: 'organizations',
+    loadComponent: () =>
+      import('./dashboard/pages/organizations/organizations.page').then(
+        (m) => m.OrganizationsPage
+      ),
   },
 ];

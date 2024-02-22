@@ -1,0 +1,57 @@
+<h5 class="mb-15 display-6 my-2">{{ "Sign In" | translate }}</h5>
+<form #loginForm="ngForm">
+  <ion-input
+    name="email"
+    class="mb-5"
+    type="email"
+    [(ngModel)]="loginData.email"
+    required
+    label="{{ 'Email' | translate }}"
+    label-placement="floating"
+    pattern="[^@s]+@[^@s]+.[^@s]+"
+  ></ion-input>
+  <div class="input-password">
+    <ion-input
+      name="password"
+      type="{{ showPassword ? 'text' : 'password' }}"
+      [(ngModel)]="loginData.password"
+      required
+      label="{{ 'Password' | translate }}"
+      label-placement="floating"
+      placeholder="{{ 'Password' | translate }}"
+      minlength="8"
+    >
+    </ion-input>
+    <ion-icon
+      class="show-option"
+      *ngIf="showPassword"
+      name="eye-off-outline"
+      (click)="toggleShow()"
+    ></ion-icon>
+    <ion-icon
+      class="hide-option"
+      *ngIf="!showPassword"
+      name="eye-outline"
+      (click)="toggleShow()"
+    ></ion-icon>
+  </div>
+
+  <ion-button
+    [disabled]="loginForm.invalid"
+    class="mb-5"
+    expand="full"
+    (click)="login()"
+    >{{ "Login" | translate }}</ion-button
+  >
+  <div class="col-12 mb-2">
+    <a [routerLink]="['/auth/forget-password']">
+      {{ "Forgot Password?" | translate }}
+    </a>
+  </div>
+  <div class="col-12 mb-2">
+    {{ "Don't have an account?" | translate }}
+    <a [routerLink]="['/auth/register']"
+      >&nbsp;{{ "Register here" | translate }}</a
+    >.
+  </div>
+</form>

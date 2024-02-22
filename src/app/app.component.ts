@@ -1,28 +1,93 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { IonApp, IonRouterOutlet, IonToast } from '@ionic/angular/standalone';
+import { ToastService } from './shared/services/toast.service';
 import { addIcons } from 'ionicons';
-import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp } from 'ionicons/icons';
+import {
+  alertCircleOutline,
+  chevronDownCircleOutline,
+  closeCircleOutline,
+  closeOutline,
+  informationCircleOutline,
+} from 'ionicons/icons';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  template: `
+    <ion-app>
+      <ion-toast
+        [isOpen]="toastService.isToastOpen()"
+        [message]="toastService.message()"
+        [duration]="10000"
+        (didDismiss)="setDefault()"
+        [icon]="icons[toastService.toastType()]"
+        [class]="toastService.toastType()"
+        [buttons]="toastButtons"
+      ></ion-toast>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-app>
+  `,
+  styles: `
+  .error {
+    color: red;
+    font-size: 1.2rem;
+  }
+  .success {
+    color: green;
+    font-size: 1.2rem;
+  }
+  .warning {
+    color: yellow;
+    font-size: 1.2rem;
+  }
+  .info {
+    // color: blue
+  }
+  `,
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    HttpClientModule,
+    CommonModule,
+    RouterModule,
+    IonApp,
+    IonRouterOutlet,
+    IonToast,
+  ],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+  icons: { [key: string]: string } = {
+    error: 'close-circle-outline',
+    info: 'information-circle-outline',
+    warning: 'alert-circle-outline',
+    success: 'chevron-down-circle-outline',
+  };
+
+  constructor(public toastService: ToastService) {
+    addIcons({
+      informationCircleOutline,
+      alertCircleOutline,
+      closeCircleOutline,
+      chevronDownCircleOutline,
+      closeOutline,
+    });
+  }
+  public toastButtons = [
+    {
+      icon: 'close-outline',
+      role: 'cancel',
+      handler: () => {
+        console.log('Dismiss clicked');
+      },
+    },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {
-    addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
+
+  setDefault() {
+    this.toastService.isToastOpen.set(false);
+    this.toastService.message.set('');
+    this.toastService.toastType.set('info');
   }
 }

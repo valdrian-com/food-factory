@@ -1,0 +1,63 @@
+/* ============ signup css ============= */
+.auth-row {
+    background: var(--ion-background-color-rgb);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .auth-cover-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+  
+    .auth-cover {
+      .title {
+        text-align: cover;
+        margin-bottom: 40px;
+      }
+  
+      .cover-image {
+        max-width: 100%;
+        margin: auto;
+  
+        img {
+          width: 100%;
+        }
+      }
+      .shape-image {
+        position: absolute;
+        z-index: -1;
+        right: 0;
+        bottom: 5%;
+      }
+    }
+  }
+  
+  .signup-wrapper {
+    background: var(--ion-background-color-rgb);
+    padding: 60px;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .form-wrapper {
+      width: 100%;
+    }
+    .singup-option {
+      button {
+        font-size: 16px;
+        font-weight: 600;
+      }
+  
+      a {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  
