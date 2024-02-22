@@ -12,6 +12,9 @@ import {
   informationCircleOutline,
 } from 'ionicons/icons';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -20,23 +23,29 @@ import { HttpClientModule } from '@angular/common/http';
       <ion-toast
         [isOpen]="toastService.isToastOpen()"
         [message]="toastService.message()"
-        [duration]="10000"
+        [duration]="100000"
         (didDismiss)="setDefault()"
         [icon]="icons[toastService.toastType()]"
         [class]="toastService.toastType()"
         [buttons]="toastButtons"
+        [position]="toastService.toastPosition()"
       ></ion-toast>
       <ion-router-outlet></ion-router-outlet>
     </ion-app>
   `,
   styles: `
+  ion-toast {
+    font-size: 1.2rem;
+    --background: rgba(255, 255, 255, 0.1);
+    padding: 5rem;
+  }
+
   .error {
     color: red;
-    font-size: 1.2rem;
+   
   }
   .success {
-    color: green;
-    font-size: 1.2rem;
+    --color: green;  
   }
   .warning {
     color: yellow;

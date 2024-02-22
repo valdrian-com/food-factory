@@ -23,6 +23,9 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { snakeCaseInterceptor } from './app/shared/interceptors/snake-case.interceptor';
 import { errorInterceptor } from './app/shared/interceptors/error.interceptor';
 import { successInterceptor } from './app/shared/interceptors/success.interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+import { provideToastr } from 'ngx-toastr';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,6 +48,8 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes),
+    provideAnimations(), // required animations providers
+    provideToastr(), // Toastr providers
     importProvidersFrom(
       TranslateModule.forRoot({
         loader: {

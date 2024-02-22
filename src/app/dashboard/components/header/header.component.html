@@ -16,9 +16,8 @@
           <ion-select-option value="orange">Orange</ion-select-option>
         </ion-select>
       </ion-item>
-
-      <ion-button routerLink="/profile/{{ authService.user()?.id }}">
-        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon name="person-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

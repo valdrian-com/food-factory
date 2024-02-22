@@ -55,17 +55,23 @@ export class AuthService {
   }
 
   logout(): void {
-    // TODO - check if is necessary a backend logout
     this.httpClient
-      .post<string>(`${this.url}/logout`, this.refreshToken)
-      .subscribe();
-    this.user.set(null);
-    this.accessToken.set('');
-    this.refreshToken.set('');
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
+      .post<string>(`${this.url}/logout`, { token: this.refreshToken() })
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.user.set(null);
+          this.accessToken.set('');
+          this.refreshToken.set('');
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('user');
+          this.router.navigate(['auth/login']);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 
   register(form: RegisterForm): void {
@@ -101,7 +107,7 @@ export class AuthService {
       .post<{ accessToken: string; refreshToken: string }>(
         `${this.url}/refresh-token`,
         {
-          refresh: this.refreshToken,
+          token: this.refreshToken(),
         }
       )
       .pipe(

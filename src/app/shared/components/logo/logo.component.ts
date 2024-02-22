@@ -7,13 +7,13 @@ import { Component, OnInit, signal } from '@angular/core';
     <div style="display: flex; justify-content: center; min-with: 100%">
       <img
         *ngIf="darkMode()"
-        src="../../../assets/images/logo/logo-light.svg"
+        src="../../../assets/logo-grey.svg"
         class="img-fluid w-25"
         alt="logo"
       />
       <img
         *ngIf="!darkMode()"
-        src="../../../assets/images/logo/logo-dark.svg"
+        src="../../../assets/logo.svg"
         class="img-fluid w-25"
         alt="logo"
       />
