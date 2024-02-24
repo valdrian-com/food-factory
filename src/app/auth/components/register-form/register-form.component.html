@@ -1,4 +1,4 @@
-<h5 class="mb-15 display-6">{{ "Sign Up" | translate }}</h5>
+<h5 class="mb-6 text-2xl">{{ "Sign Up" | translate }}</h5>
 <form #registerForm="ngForm">
   <ion-input
     name="firstName"
@@ -25,7 +25,7 @@
     label-placement="floating"
     pattern="[^@s]+@[^@s]+.[^@s]+"
   ></ion-input>
-  <div class="input-password">
+  <div class="flex flex-col input-password">
     <ion-input
       name="password"
       type="{{ showPassword ? 'text' : 'password' }}"
@@ -38,13 +38,13 @@
     >
     </ion-input>
     <ion-icon
-      class="show-option"
+      class="cursor-pointer"
       *ngIf="showPassword"
       name="eye-off-outline"
       (click)="toggleShow()"
     ></ion-icon>
     <ion-icon
-      class="hide-option"
+      class="cursor-pointer"
       *ngIf="!showPassword"
       name="eye-outline"
       (click)="toggleShow()"
@@ -53,11 +53,11 @@
 
   <ion-button
     [disabled]="registerForm.invalid"
-    expand="full"
+    class="w-full"
     (click)="register()"
     >{{ "Register" | translate }}</ion-button
   >
-  <div class="py-5">
+  <div class="py-4">
     {{ "Already have an account?" | translate }}
     <a [routerLink]="['/auth/login']">{{ "Login here" | translate }}</a
     >.

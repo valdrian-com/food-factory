@@ -18,17 +18,10 @@ export const routes: Routes = [
     canActivate: [isAuthenticateGuard()],
   },
   {
-    path: 'organization',
+    path: 'clients',
     loadComponent: () =>
-      import('./dashboard/pages/organization/organization.page').then(
-        (m) => m.OrganizationPage
-      ),
-  },
-  {
-    path: 'organizations',
-    loadComponent: () =>
-      import('./dashboard/pages/organizations/organizations.page').then(
-        (m) => m.OrganizationsPage
+      import('./dashboard/pages/clients/clients.page').then(
+        (m) => m.ClientsPage
       ),
   },
 ];

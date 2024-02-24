@@ -9,6 +9,10 @@ import {
 import { addIcons } from 'ionicons';
 import { IonicModule } from '@ionic/angular';
 import {
+  businessOutline,
+  businessSharp,
+  barChartOutline,
+  barChartSharp,
   mailOutline,
   mailSharp,
   paperPlaneOutline,
@@ -47,7 +51,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class MenuComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
+    { title: 'Dashboard', url: '/info', icon: 'bar-chart' },
+    { title: 'Clients', url: '/clients', icon: 'business' },
     { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/archived', icon: 'archive' },
@@ -56,6 +61,10 @@ export class MenuComponent {
   ];
   constructor(public authService: AuthService) {
     addIcons({
+      businessOutline,
+      businessSharp,
+      barChartOutline,
+      barChartSharp,
       mailOutline,
       mailSharp,
       paperPlaneOutline,

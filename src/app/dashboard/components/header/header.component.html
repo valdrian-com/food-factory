@@ -2,7 +2,11 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button *ngIf="!backUrl"></ion-menu-button>
-      <ion-back-button defaultHref="/" [routerLink]="backUrl"></ion-back-button>
+      <ion-back-button
+        *ngIf="backUrl"
+        defaultHref="/"
+        [routerLink]="backUrl"
+      ></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="">
       <ion-title class="h-100"> {{ title }} </ion-title>
@@ -10,12 +14,22 @@
 
     <ion-buttons slot="secondary">
       <ion-item>
-        <ion-select label="{{ 'Organizations' | translate }}" placeholder="">
-          <ion-select-option value="apple">Apple</ion-select-option>
-          <ion-select-option value="banana">Banana</ion-select-option>
-          <ion-select-option value="orange">Orange</ion-select-option>
+        <ion-select
+          *ngIf="clientsService.clients()"
+          [(ngModel)]="clientId"
+          name="clientId"
+          label="{{ 'Client' | translate }}"
+          placeholder=""
+        >
+          <ion-select-option
+            *ngFor="let client of clientsService.clients()"
+            [value]="client.id"
+            (click)="appStateService.setClient(client)"
+            >{{ client.name }}</ion-select-option
+          >
         </ion-select>
       </ion-item>
+
       <ion-button (click)="presentPopover($event)">
         <ion-icon name="person-circle"></ion-icon>
       </ion-button>

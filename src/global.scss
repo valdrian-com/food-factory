@@ -27,11 +27,58 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/mixins";
-@import "ngx-toastr/toastr-bs5-alert";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .split-pane-visible > ion-menu {
   max-width: 304px !important;
+}
+
+#no-more-tables {
+  @media only screen and (max-width: 800px) {
+    // Force table to not be like tables anymore
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    // Hide table headers (but not display: none;, for accessibility)
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr {
+      border: 1px solid #ccc;
+    }
+
+    td {
+      // Behave like a "row"
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%;
+      white-space: normal;
+      text-align: left;
+
+      &:before {
+        // Now like a table header
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        content: attr(data-title); // Label the data
+      }
+    }
+  }
 }

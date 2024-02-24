@@ -12,6 +12,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { addIcons } from 'ionicons';
 import { personCircle, personOutline } from 'ionicons/icons';
 import { ProfilePopoverComponent } from '../profile-popover/profile-popover.component';
+import { Client } from 'src/app/shared/interfaces/Client';
+import { ClientsService } from '../../pages/clients/clients.service';
+import { AppStateService } from 'src/app/shared/services/app-state.service';
 
 @Component({
   selector: 'app-header',
@@ -31,10 +34,14 @@ import { ProfilePopoverComponent } from '../profile-popover/profile-popover.comp
 export class HeaderComponent implements OnInit {
   @Input() title!: string;
   @Input() backUrl!: string;
+  client: any;
+  clientId: any;
 
   constructor(
     public authService: AuthService,
-    public popoverController: PopoverController
+    public clientsService: ClientsService,
+    public popoverController: PopoverController,
+    public appStateService: AppStateService
   ) {
     addIcons({
       personOutline,

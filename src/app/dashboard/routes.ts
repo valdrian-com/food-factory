@@ -17,6 +17,11 @@ export const DASHBOARD_ROUTES: Routes = [
           import('./pages/info/info.page').then((m) => m.InfoPage),
       },
       {
+        path: 'clients',
+        loadComponent: () =>
+          import('./pages/clients/clients.page').then((m) => m.ClientsPage),
+      },
+      {
         path: 'categories',
         loadComponent: () =>
           import('./pages/categories/categories.page').then(

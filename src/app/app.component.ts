@@ -1,60 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
-import { IonApp, IonRouterOutlet, IonToast } from '@ionic/angular/standalone';
-import { ToastService } from './shared/services/toast.service';
-import { addIcons } from 'ionicons';
 import {
-  alertCircleOutline,
-  chevronDownCircleOutline,
-  closeCircleOutline,
-  closeOutline,
-  informationCircleOutline,
-} from 'ionicons/icons';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+  IonApp,
+  IonContent,
+  IonRouterOutlet,
+  IonToast,
+} from '@ionic/angular/standalone';
 
-import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+
+import { Subscription } from 'rxjs';
+import { NotificationService } from './shared/components/notifications/notifications.service';
+import { NotificationsComponent } from './shared/components/notifications/notifications.component';
+import { NotificationModel } from './shared/components/notifications/notification.model';
 
 @Component({
   selector: 'app-root',
   template: `
     <ion-app>
-      <ion-toast
-        [isOpen]="toastService.isToastOpen()"
-        [message]="toastService.message()"
-        [duration]="100000"
-        (didDismiss)="setDefault()"
-        [icon]="icons[toastService.toastType()]"
-        [class]="toastService.toastType()"
-        [buttons]="toastButtons"
-        [position]="toastService.toastPosition()"
-      ></ion-toast>
-      <ion-router-outlet></ion-router-outlet>
+      <div style="position: absolute; top: 0; right: 0; z-index: 9999;">
+        <app-notifications
+          *ngFor="let notification of notifications"
+          [msgType]="notification.msgType"
+          [message]="notification.message"
+        ></app-notifications>
+      </div>
+
+      <ion-router-outlet> </ion-router-outlet>
     </ion-app>
   `,
-  styles: `
-  ion-toast {
-    font-size: 1.2rem;
-    --background: rgba(255, 255, 255, 0.1);
-    padding: 5rem;
-  }
-
-  .error {
-    color: red;
-   
-  }
-  .success {
-    --color: green;  
-  }
-  .warning {
-    color: yellow;
-    font-size: 1.2rem;
-  }
-  .info {
-    // color: blue
-  }
-  `,
+  styles: ``,
   standalone: true,
   imports: [
     RouterLink,
@@ -65,38 +41,26 @@ import { ToastrModule } from 'ngx-toastr';
     IonApp,
     IonRouterOutlet,
     IonToast,
+    NotificationsComponent,
+    IonContent,
   ],
 })
 export class AppComponent {
-  icons: { [key: string]: string } = {
-    error: 'close-circle-outline',
-    info: 'information-circle-outline',
-    warning: 'alert-circle-outline',
-    success: 'chevron-down-circle-outline',
-  };
+  notifications: NotificationModel[] = [];
+  private subscription!: Subscription;
 
-  constructor(public toastService: ToastService) {
-    addIcons({
-      informationCircleOutline,
-      alertCircleOutline,
-      closeCircleOutline,
-      chevronDownCircleOutline,
-      closeOutline,
-    });
+  constructor(private notificationService: NotificationService) {}
+
+  ngOnInit() {
+    this.subscription = this.notificationService.notifications$.subscribe(
+      (notifications: NotificationModel[]) => {
+        console.log(notifications);
+        this.notifications = notifications;
+      }
+    );
   }
-  public toastButtons = [
-    {
-      icon: 'close-outline',
-      role: 'cancel',
-      handler: () => {
-        console.log('Dismiss clicked');
-      },
-    },
-  ];
 
-  setDefault() {
-    this.toastService.isToastOpen.set(false);
-    this.toastService.message.set('');
-    this.toastService.toastType.set('info');
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

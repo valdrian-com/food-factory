@@ -1,0 +1,57 @@
+<app-header title="Info" backUrl=""></app-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div
+    [ngClass]="
+  'bg-red-500 text-white' 
+"
+    class="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+    role="alert"
+    style="z-index: 9999"
+  >
+    <ion-icon name="information-circle" class="mr-2"></ion-icon>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+    laudantium eaque repellat asperiores maiores, modi fugiat sequi architecto
+    animi aut rem consequuntur corporis eum ut veritatis velit voluptatum iusto
+    quis?
+    <button class="ml-auto">Dismiss</button>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div id="no-more-tables">
+        <table
+          class="col-md-12 table-bordered table-striped table-condensed cf"
+        >
+          <thead class="cf">
+            <tr>
+              <th>Code</th>
+              <th>Company</th>
+              <th class="numeric">Price</th>
+              <th class="numeric">Change</th>
+              <th class="numeric">Change %</th>
+              <th class="numeric">Open</th>
+              <th class="numeric">High</th>
+              <th class="numeric">Low</th>
+              <th class="numeric">Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-title="Code">AAC</td>
+              <td data-title="Company">
+                AUSTRALIAN AGRICULTURAL COMPANY LIMITED.
+              </td>
+              <td data-title="Price" class="numeric">$1.38</td>
+              <td data-title="Change" class="numeric">-0.01</td>
+              <td data-title="Change %" class="numeric">-0.36%</td>
+              <td data-title="Open" class="numeric">$1.39</td>
+              <td data-title="High" class="numeric">$1.39</td>
+              <td data-title="Low" class="numeric">$1.38</td>
+              <td data-title="Volume" class="numeric">9,395</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ion-content>

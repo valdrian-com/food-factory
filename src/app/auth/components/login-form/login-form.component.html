@@ -1,8 +1,8 @@
-<h5 class="mb-15 display-6 my-2">{{ "Sign In" | translate }}</h5>
+<h5 class="mb-4 text-2xl my-2">{{ "Sign In" | translate }}</h5>
 <form #loginForm="ngForm">
   <ion-input
     name="email"
-    class="mb-5"
+    class="mb-4"
     type="email"
     [(ngModel)]="loginData.email"
     required
@@ -10,7 +10,7 @@
     label-placement="floating"
     pattern="[^@s]+@[^@s]+.[^@s]+"
   ></ion-input>
-  <div class="input-password">
+  <div class="flex flex-col input-password">
     <ion-input
       name="password"
       type="{{ showPassword ? 'text' : 'password' }}"
@@ -23,13 +23,13 @@
     >
     </ion-input>
     <ion-icon
-      class="show-option"
+      class="cursor-pointer"
       *ngIf="showPassword"
       name="eye-off-outline"
       (click)="toggleShow()"
     ></ion-icon>
     <ion-icon
-      class="hide-option"
+      class="cursor-pointer"
       *ngIf="!showPassword"
       name="eye-outline"
       (click)="toggleShow()"
@@ -38,8 +38,7 @@
 
   <ion-button
     [disabled]="loginForm.invalid"
-    class="mb-5"
-    expand="full"
+    class="mb-4 w-full"
     (click)="login()"
     >{{ "Login" | translate }}</ion-button
   >
