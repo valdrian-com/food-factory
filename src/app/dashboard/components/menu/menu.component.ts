@@ -52,7 +52,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class MenuComponent {
   public appPages = [
     { title: 'Dashboard', url: '/info', icon: 'bar-chart' },
-    { title: 'Clients', url: '/clients', icon: 'business' },
+    { title: 'Organizations', url: '/clients', icon: 'business' },
     { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/archived', icon: 'archive' },

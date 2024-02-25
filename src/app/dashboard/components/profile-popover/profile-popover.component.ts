@@ -41,6 +41,7 @@ export class ProfilePopoverComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
   logout() {
     this.authService.logout();
     this.popoverController.dismiss();

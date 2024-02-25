@@ -1,5 +1,5 @@
 import { Injectable, OnInit, WritableSignal, signal } from '@angular/core';
-import { Client } from '../interfaces/Client';
+import { Organization } from '../interfaces/Organization';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,24 +8,24 @@ import { Router } from '@angular/router';
 export class AppStateService implements OnInit {
   darkMode = signal(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-  client: WritableSignal<Client | null> = signal(
-    JSON.parse(localStorage.getItem('client') as string)
+  organization: WritableSignal<Organization | null> = signal(
+    JSON.parse(localStorage.getItem('organization') as string)
   );
 
   constructor(private router: Router) {
-    console.log(this.client());
-    if (!this.client()) {
-      this.router.navigate(['/clients']);
+    console.log('constructor', this.organization());
+    if (!this.organization()) {
+      this.router.navigate(['/organizations']);
     }
   }
   ngOnInit(): void {
-    console.log(this.client());
-    if (!this.client()) {
-      this.router.navigate(['/clients']);
+    console.log('on init', this.organization());
+    if (!this.organization()) {
+      this.router.navigate(['/organizations']);
     }
   }
-  setClient(client: Client) {
-    this.client.set(client);
-    localStorage.setItem('client', JSON.stringify(client));
+  setOrganization(organization: Organization) {
+    this.organization.set(organization);
+    localStorage.setItem('organization', JSON.stringify(organization));
   }
 }

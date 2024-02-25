@@ -54,7 +54,7 @@ export class AppComponent {
   ngOnInit() {
     this.subscription = this.notificationService.notifications$.subscribe(
       (notifications: NotificationModel[]) => {
-        console.log(notifications);
+        console.log('n', notifications);
         this.notifications = notifications;
       }
     );

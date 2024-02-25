@@ -6,7 +6,7 @@ import { AuthService } from '../../auth.service';
 import { addIcons } from 'ionicons';
 import { eyeOffOutline, eyeOutline } from 'ionicons/icons';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LogoComponent } from 'src/app/shared/components/logo/logo.component';
 
 @Component({
@@ -29,7 +29,11 @@ export class NewPasswordPage implements OnInit {
   id!: string | null;
   token!: string | null;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute) {
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     addIcons({ eyeOutline, eyeOffOutline });
   }
 
@@ -37,6 +41,10 @@ export class NewPasswordPage implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.id = params['id'];
       this.token = params['token'];
+
+      if (!this.id || this.token) {
+        this.router.navigate(['/auth/login']);
+      }
 
       console.log(this.id, this.token);
     });

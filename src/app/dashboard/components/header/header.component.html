@@ -15,17 +15,17 @@
     <ion-buttons slot="secondary">
       <ion-item>
         <ion-select
-          *ngIf="clientsService.clients()"
-          [(ngModel)]="clientId"
-          name="clientId"
-          label="{{ 'Client' | translate }}"
+          *ngIf="organizationService.organizations()"
+          [(ngModel)]="organizationId"
+          (ngModelChange)="onOrganizationChange($event)"
+          name="organization"
+          label="{{ 'Organization' | translate }}"
           placeholder=""
         >
           <ion-select-option
-            *ngFor="let client of clientsService.clients()"
-            [value]="client.id"
-            (click)="appStateService.setClient(client)"
-            >{{ client.name }}</ion-select-option
+            *ngFor="let organization of organizationService.organizations()"
+            [value]="organization.id"
+            >{{ organization.name }}</ion-select-option
           >
         </ion-select>
       </ion-item>

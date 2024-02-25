@@ -24,4 +24,11 @@ export const routes: Routes = [
         (m) => m.ClientsPage
       ),
   },
+  {
+    path: 'organizations',
+    loadComponent: () =>
+      import('./dashboard/pages/organizations/organizations.page').then(
+        (m) => m.OrganizationsPage
+      ),
+  },
 ];

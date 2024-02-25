@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Observable, catchError, tap } from 'rxjs';
-import { Client, ClientsInput } from 'src/app/shared/interfaces/Client';
+import { Client, ClientsInput } from 'src/app/shared/interfaces/Organization';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

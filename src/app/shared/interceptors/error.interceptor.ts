@@ -10,6 +10,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((e) => {
+      console.log('err', e);
       if (e.error.detail) {
         notificationService.addNotification({
           msgType: 'error',

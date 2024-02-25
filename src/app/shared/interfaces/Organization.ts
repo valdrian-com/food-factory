@@ -1,4 +1,4 @@
-export interface Client {
+export interface Organization {
   id: string;
   name: string;
   createdAt: Date;
@@ -15,7 +15,7 @@ export interface Client {
   meta?: {};
 }
 
-export interface ClientsInput {
+export interface OrganizationInput {
   name: string;
   meta?: {};
 }

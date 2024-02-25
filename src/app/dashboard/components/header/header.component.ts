@@ -12,9 +12,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { addIcons } from 'ionicons';
 import { personCircle, personOutline } from 'ionicons/icons';
 import { ProfilePopoverComponent } from '../profile-popover/profile-popover.component';
-import { Client } from 'src/app/shared/interfaces/Client';
-import { ClientsService } from '../../pages/clients/clients.service';
 import { AppStateService } from 'src/app/shared/services/app-state.service';
+import { OrganizationsService } from '../../pages/organizations/organizations.service';
+import { Organization } from 'src/app/shared/interfaces/Organization';
 
 @Component({
   selector: 'app-header',
@@ -34,12 +34,12 @@ import { AppStateService } from 'src/app/shared/services/app-state.service';
 export class HeaderComponent implements OnInit {
   @Input() title!: string;
   @Input() backUrl!: string;
-  client: any;
-  clientId: any;
+
+  organizationId!: string | undefined;
 
   constructor(
     public authService: AuthService,
-    public clientsService: ClientsService,
+    public organizationService: OrganizationsService,
     public popoverController: PopoverController,
     public appStateService: AppStateService
   ) {
@@ -49,7 +49,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.organizationId = this.appStateService.organization()?.id;
+  }
 
   async presentPopover(event: any) {
     const popover = await this.popoverController.create({
@@ -58,5 +60,11 @@ export class HeaderComponent implements OnInit {
       translucent: true,
     });
     return await popover.present();
+  }
+
+  onOrganizationChange($event: any) {
+    console.log('onOrganizationChange', $event);
+    this.organizationId = $event.detail.value.id;
+    this.appStateService.setOrganization($event.detail.value);
   }
 }
