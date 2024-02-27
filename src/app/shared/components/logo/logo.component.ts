@@ -8,13 +8,13 @@ import { Component, OnInit, signal } from '@angular/core';
       <img
         *ngIf="darkMode()"
         src="../../../assets/logo-grey.svg"
-        class="img-fluid w-25"
+        class="w-100 h-auto"
         alt="logo"
       />
       <img
         *ngIf="!darkMode()"
+        class="w-100 h-auto"
         src="../../../assets/logo.svg"
-        class="img-fluid w-25"
         alt="logo"
       />
     </div>

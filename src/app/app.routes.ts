@@ -17,18 +17,4 @@ export const routes: Routes = [
       import('./dashboard/routes').then((m) => m.DASHBOARD_ROUTES),
     canActivate: [isAuthenticateGuard()],
   },
-  {
-    path: 'clients',
-    loadComponent: () =>
-      import('./dashboard/pages/clients/clients.page').then(
-        (m) => m.ClientsPage
-      ),
-  },
-  {
-    path: 'organizations',
-    loadComponent: () =>
-      import('./dashboard/pages/organizations/organizations.page').then(
-        (m) => m.OrganizationsPage
-      ),
-  },
 ];

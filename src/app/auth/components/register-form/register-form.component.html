@@ -59,7 +59,9 @@
   >
   <div class="py-4">
     {{ "Already have an account?" | translate }}
-    <a [routerLink]="['/auth/login']">{{ "Login here" | translate }}</a
+    <a [routerLink]="['/auth/login']" class="text-blue-500">{{
+      "Login here" | translate
+    }}</a
     >.
   </div>
 </form>

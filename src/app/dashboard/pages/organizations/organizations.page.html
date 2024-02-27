@@ -1,2 +1,6 @@
-<app-header [title]="title" backUrl=""></app-header>
-<ion-content [fullscreen]="true"> </ion-content>
+<app-header title="" backUrl=""></app-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <app-table [data]="data"></app-table>
+  </ion-card>
+</ion-content>

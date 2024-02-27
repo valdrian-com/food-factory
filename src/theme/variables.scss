@@ -77,7 +77,7 @@
    * -------------------------------------------
    */
 
-  body {
+  body:dark {
     --ion-color-primary: #3e5b8f;
     --ion-color-primary-rgb: 62, 91, 143;
     --ion-color-primary-contrast: #ffffff;
@@ -212,7 +212,7 @@
    */
 
   .md body {
-    --ion-background-color: #121212;
+    --ion-background-color: #1b222c;
     --ion-background-color-rgb: 18, 18, 18;
 
     --ion-text-color: #ffffff;
@@ -240,13 +240,13 @@
     --ion-color-step-900: #e7e7e7;
     --ion-color-step-950: #f3f3f3;
 
-    --ion-item-background: #1e1e1e;
+    --ion-item-background: #25303f;
 
-    --ion-toolbar-background: #1f1f1f;
+    --ion-toolbar-background: #25303f;
 
-    --ion-tab-bar-background: #1f1f1f;
+    --ion-tab-bar-background: #25303f;
 
-    --ion-card-background: #1e1e1e;
+    --ion-card-background: #25303f;
   }
 }
 
@@ -256,4 +256,57 @@ html {
    * https://ionicframework.com/docs/layout/dynamic-font-scaling
    */
   --ion-dynamic-font: var(--ion-default-dynamic-font);
+}
+
+@media only screen and (max-width: 800px) {
+  /* Force table to not be like tables anymore */
+  #responsive-tables table,
+  #responsive-tables thead,
+  #responsive-tables tbody,
+  #responsive-tables th,
+  #responsive-tables td,
+  #responsive-tables tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  #responsive-tables thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  #responsive-tables tr {
+    border: 1px solid --ion-border-color;
+  }
+
+  #responsive-tables td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid --ion-border-color;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+    text-align: left;
+  }
+
+  #responsive-tables td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  /*
+Label the data
+*/
+  #responsive-tables td:before {
+    content: attr(data-title);
+  }
 }

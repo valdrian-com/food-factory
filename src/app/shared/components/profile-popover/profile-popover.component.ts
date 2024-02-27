@@ -9,6 +9,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-profile-popover',
   template: ` <ion-list>
+    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+      <div>
+        {{ authService.user()?.firstName }}
+        {{ authService.user()?.lastName }}
+      </div>
+      <div class="font-medium truncate">{{ authService.user()?.email }}</div>
+    </div>
     <ion-item
       button
       (click)="popoverController.dismiss()"

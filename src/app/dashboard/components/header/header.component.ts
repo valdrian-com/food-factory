@@ -11,10 +11,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { addIcons } from 'ionicons';
 import { personCircle, personOutline } from 'ionicons/icons';
-import { ProfilePopoverComponent } from '../profile-popover/profile-popover.component';
+import { ProfilePopoverComponent } from '../../../shared/components/profile-popover/profile-popover.component';
 import { AppStateService } from 'src/app/shared/services/app-state.service';
 import { OrganizationsService } from '../../pages/organizations/organizations.service';
-import { Organization } from 'src/app/shared/interfaces/Organization';
+import { AvatarComponent } from 'src/app/shared/components/avatar/avatar.component';
 
 @Component({
   selector: 'app-header',
@@ -29,6 +29,7 @@ import { Organization } from 'src/app/shared/interfaces/Organization';
     RouterLinkActive,
     TranslateModule,
     RouterLinkWithHref,
+    AvatarComponent,
   ],
 })
 export class HeaderComponent implements OnInit {
@@ -60,11 +61,5 @@ export class HeaderComponent implements OnInit {
       translucent: true,
     });
     return await popover.present();
-  }
-
-  onOrganizationChange($event: any) {
-    console.log('onOrganizationChange', $event);
-    this.organizationId = $event.detail.value.id;
-    this.appStateService.setOrganization($event.detail.value);
   }
 }

@@ -14,25 +14,10 @@
 
     <ion-buttons slot="secondary">
       <ion-item>
-        <ion-select
-          *ngIf="organizationService.organizations()"
-          [(ngModel)]="organizationId"
-          (ngModelChange)="onOrganizationChange($event)"
-          name="organization"
-          label="{{ 'Organization' | translate }}"
-          placeholder=""
-        >
-          <ion-select-option
-            *ngFor="let organization of organizationService.organizations()"
-            [value]="organization.id"
-            >{{ organization.name }}</ion-select-option
-          >
-        </ion-select>
+        {{ organizationService.organization()?.name }}
       </ion-item>
 
-      <ion-button (click)="presentPopover($event)">
-        <ion-icon name="person-circle"></ion-icon>
-      </ion-button>
+      <app-avatar></app-avatar>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

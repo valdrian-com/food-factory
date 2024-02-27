@@ -125,6 +125,13 @@ export const DASHBOARD_ROUTES: Routes = [
         loadComponent: () =>
           import('./pages/profile/profile.page').then((m) => m.ProfilePage),
       },
+      {
+        path: 'organizations',
+        loadComponent: () =>
+          import('./pages/organizations/organizations.page').then(
+            (m) => m.OrganizationsPage
+          ),
+      },
     ],
   },
 ];

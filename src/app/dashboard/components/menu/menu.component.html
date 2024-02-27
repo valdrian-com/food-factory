@@ -1,18 +1,28 @@
-<ion-list id="inbox-list">
-  <ion-list-header class="position-relative">
-    <app-logo></app-logo>
-  </ion-list-header>
-  <div class="row ion-padding">
-    <div class="col-10">
-      <ion-note>
-        {{ "hi" | translate }}
-
-        {{ authService.user()?.firstName }}
-        {{ authService.user()?.lastName }}
-      </ion-note>
-    </div>
+<ion-list id="inbox-list" class="px-3">
+  <div class="flex justify-center items-center p-4 min-w-full">
+    <app-logo class="w-20 object-center"></app-logo>
+    <!--
+    <app-avatar></app-avatar>
+    -->
   </div>
-
+  <br />
+  <ion-item>
+    <ion-select
+      *ngIf="organizationService.organizations()"
+      [(ngModel)]="organizationId"
+      (ngModelChange)="onOrganizationChange($event)"
+      name="organization"
+      label="{{ 'Select Organization' | translate }}"
+      placeholder=""
+    >
+      <ion-select-option
+        *ngFor="let organization of organizationService.organizations()"
+        [value]="organization.id"
+        >{{ organization.name }}</ion-select-option
+      >
+    </ion-select>
+  </ion-item>
+  <br />
   <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
     <ion-item
       routerDirection="root"

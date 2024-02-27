@@ -7,7 +7,7 @@ import {
   RouterLinkWithHref,
 } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { IonicModule } from '@ionic/angular';
+import { DomController, IonicModule } from '@ionic/angular';
 import {
   businessOutline,
   businessSharp,
@@ -32,6 +32,9 @@ import {
 import { LogoComponent } from 'src/app/shared/components/logo/logo.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { OrganizationsService } from '../../pages/organizations/organizations.service';
+import { AppStateService } from 'src/app/shared/services/app-state.service';
+import { AvatarComponent } from 'src/app/shared/components/avatar/avatar.component';
 
 @Component({
   selector: 'app-menu',
@@ -47,19 +50,26 @@ import { AuthService } from 'src/app/auth/auth.service';
     LogoComponent,
     TranslateModule,
     RouterLinkWithHref,
+    AvatarComponent,
   ],
 })
 export class MenuComponent {
+  organizationId!: string | undefined;
+
   public appPages = [
     { title: 'Dashboard', url: '/info', icon: 'bar-chart' },
-    { title: 'Organizations', url: '/clients', icon: 'business' },
+    { title: 'Organizations', url: '/organizations', icon: 'business' },
     { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/spam', icon: 'warning' },
   ];
-  constructor(public authService: AuthService) {
+  constructor(
+    public authService: AuthService,
+    public organizationService: OrganizationsService,
+    public appStateService: AppStateService
+  ) {
     addIcons({
       businessOutline,
       businessSharp,
@@ -81,5 +91,11 @@ export class MenuComponent {
       bookmarkSharp,
       pencilOutline,
     });
+  }
+
+  onOrganizationChange($event: any) {
+    console.log('onOrganizationChange', $event);
+    this.organizationId = $event.detail.value.id;
+    this.appStateService.setOrganization($event.detail.value);
   }
 }

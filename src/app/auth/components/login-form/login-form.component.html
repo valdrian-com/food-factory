@@ -43,13 +43,13 @@
     >{{ "Login" | translate }}</ion-button
   >
   <div class="col-12 mb-2">
-    <a [routerLink]="['/auth/forget-password']">
+    <a [routerLink]="['/auth/forget-password']" class="text-blue-500">
       {{ "Forgot Password?" | translate }}
     </a>
   </div>
   <div class="col-12 mb-2">
     {{ "Don't have an account?" | translate }}
-    <a [routerLink]="['/auth/register']"
+    <a class="text-blue-500" [routerLink]="['/auth/register']"
       >&nbsp;{{ "Register here" | translate }}</a
     >.
   </div>
